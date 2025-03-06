@@ -1,14 +1,13 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export default function Home() {
-
   // Keep track of the classification result and the model loading status.
-  const [result, setResult] = useState<boolean|null>(null);
-  const [ready, setReady] = useState<boolean|null>(null);
+  const [result, setResult] = useState<boolean | null>(null);
+  const [ready, setReady] = useState<boolean | null>(null);
 
-  const classify = async (text:any) => {
+  const classify = async (text: any) => {
     if (!text) return;
     if (ready === null) setReady(false);
 
@@ -24,22 +23,23 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-12">
       <h1 className="text-5xl font-bold mb-2 text-center">Transformers.js</h1>
-      <h2 className="text-2xl mb-4 text-center">Next.js template (server-side)</h2>
+      <h2 className="text-2xl mb-4 text-center">
+        Next.js template (server-side)
+      </h2>
       <input
         type="text"
         className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4"
         placeholder="Enter text here"
         onInput={(e: React.FormEvent<HTMLInputElement>) => {
-            classify((e.target as HTMLInputElement).value);
+          classify((e.target as HTMLInputElement).value);
         }}
       />
 
       {ready !== null && (
         <pre className="bg-gray-100 p-2 rounded">
-          {
-            (!ready || !result) ? 'Loading...' : JSON.stringify(result, null, 2)}
+          {!ready || !result ? "Loading..." : JSON.stringify(result, null, 2)}
         </pre>
       )}
     </main>
-  )
+  );
 }
