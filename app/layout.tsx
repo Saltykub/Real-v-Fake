@@ -44,7 +44,7 @@ export default function RootLayout({
               <div className="">{children}</div>
 
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-                <p>&copy; 2025 Real||Fake. All Rights Reserved.</p>
+                <p>&copy; 2025 Real v Fake. All Rights Reserved.</p>
               </footer>
             </div>
           </main>

@@ -18,7 +18,7 @@ export default async function Header() {
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/" title="" className="flex rounded outline-none">
-              <img className="w-auto h-8" src="logo.svg" alt="" />
+              <img className="w-20" src="logo.png" alt="" />
             </Link>
           </div>
 
@@ -61,8 +61,8 @@ export default async function Header() {
             {/* <Link href="#" className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"> Fees </Link> */}
 
             <Link
-              href="#"
-              className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none hover:text-opacity-50"
+              href="/about"
+              className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
             >
               {" "}
               About Us{" "}
