@@ -96,13 +96,13 @@ async def fetch_product(url: str = Query(..., title="Product URL", description="
         review['head'] = head
 
     product_data = {
-        "Title": title,
-        "Price": price,
-        "Rating": rating,
-        "Total Reviews": review_count,
-        "Description": description,
-        "Reviews": reviews, # i put keys as 'content' and 'rating' :3
-        "Image Url":image_tag
+        "title": title,
+        "price": price,
+        "rating": rating,
+        "totalReviews": review_count,
+        "description": description,
+        "reviews": reviews, # i put keys as 'content' and 'rating' :3
+        "imageUrl":image_tag
     }
 
     return product_data
