@@ -17,7 +17,7 @@ export default async function Header() {
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
-            <Link href="/" title="" className="flex rounded outline-none">
+            <Link href="/" title="" className="flex outline-none">
               <img className="w-20" src="logo.png" alt="" />
             </Link>
           </div>
@@ -41,18 +41,18 @@ export default async function Header() {
             </button>
           </div>
 
-          <div className="hidden lg:flex lg:ml-10 xl:ml-16 lg:items-center lg:justify-center lg:space-x-8 xl:space-x-16">
+          <div className="hidden lg:flex lg:ml-10 xl:ml-16 lg:items-center lg:justify-center lg:space-x-8">
             <Link
               href="#"
-              className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
+              className="px-4 py-2 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50"
             >
               {" "}
-              Solutions{" "}
+              Dashboard{" "}
             </Link>
 
             <Link
-              href="#"
-              className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
+              href="/community"
+              className="px-4 py-2 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50"
             >
               {" "}
               Community Reports{" "}
@@ -62,7 +62,7 @@ export default async function Header() {
 
             <Link
               href="/about"
-              className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"
+              className="px-4 py-2 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50"
             >
               {" "}
               About Us{" "}
@@ -76,7 +76,7 @@ export default async function Header() {
                 <form action={signOutAction}>
                   <button
                     type="submit"
-                    className="px-4 py-1 text-base font-medium leading-7 text-gray-900 ring-2 ring-black transition-all duration-200 border border-transparent rounded-xl hover:bg-gray-100"
+                    className="px-4 py-2 text-base font-medium leading-7 text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50"
                   >
                     Sign out
                   </button>
@@ -86,7 +86,7 @@ export default async function Header() {
               <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-8 xl:space-x-10">
                 <Link
                   href="/sign-in"
-                  className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50 "
+                  className="px-4 py-2 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50 "
                 >
                   {" "}
                   Sign in{" "}
@@ -94,7 +94,7 @@ export default async function Header() {
 
                 <Link
                   href="/sign-up"
-                  className="px-4 py-1 text-base font-medium leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-gray-800"
+                  className="px-4 py-1 text-base font-medium leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-opacity-90"
                 >
                   Sign up
                 </Link>
