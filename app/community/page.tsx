@@ -1,7 +1,7 @@
 'use client'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/utils/supabase/client'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -31,7 +31,7 @@ export default function Community() {
   // const { data: reports } = await supabase.from('reports').select()
 
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 2;
+  const recordsPerPage = 5;
   const totalPages = Math.ceil((reports ? reports.length : 0) / recordsPerPage);
 
   const indexOfLastRecord = currentPage * recordsPerPage;
@@ -43,32 +43,31 @@ export default function Community() {
   return (
     <div className='w-screen px-4 lg:px-24'>
       <div className="flex justify-between items-center pb-4">
-        <h2 className="text-2xl font-semibold">Community Reports</h2>
+        <h2 className="text-lg lg:text-2xl font-semibold">Community Reports</h2>
         <input type="text" placeholder="Search..." className="border p-2 rounded-md w-1/3" />
       </div>
-      <table className="w-full border-collapse">
+      <table className="text-xs lg:text-base w-full border-separate border rounded-md">
         <thead>
-          <tr className="bg-gray-100 text-left font-sans">
-            <th className="p-2 font-semibold uppercase tracking-wider">Shop Name</th>
-            <th className="p-2 font-semibold uppercase tracking-wider">Platform</th>
-            {/* <th className="p-2 font-semibold">Confidence</th> */}
-            <th className="p-2 font-semibold uppercase tracking-wider">Last Update</th>
-            <th className=""></th>
+          <tr className="bg-gray-100 text-left font-sans border-b">
+            <th className="rounded-tl-sm p-2 py-4 font-semibold uppercase tracking-wider w-1/3 lg:w-1/2">Shop Name</th>
+            <th className="p-2 font-semibold uppercase tracking-wider w-1/5">Platform</th>
+            <th className="p-2 font-semibold uppercase tracking-wider w-1/5">Last Update</th>
+            <th className="rounded-tr-sm"></th>
           </tr>
         </thead>
         <tbody>
-          {currentRecords ? currentRecords.map((report) => (
-            <tr key={report.id} className={cn("border-b", statusColors(report.confidence))}>
-              <td className="p-2 whitespace-nowrap">{report.shop ? report.shop : "Unknown"}</td>
-              <td className="p-2 whitespace-nowrap">
-                <div className='h-12 flex items-center'>
-                  <Image alt="platform" height={100} width={100} src={"platforms/" + report.platform + ".svg"} />
+          {currentRecords ? currentRecords.map((report, idx) => (
+            <tr key={report.id} className={cn("", statusColors(report.confidence))}>
+              <td className={cn("p-2 py-6 font-medium", (idx + 1) % recordsPerPage === 0 || idx + 1 === report.length ? "rounded-bl-sm" : null)}>{report.shop ? report.shop : "Unknown"}</td>
+              <td className="p-2">
+                <div className=''>
+                  {report.platform === "Other" ? "Other" : <Image alt="platform" height={100} width={150} src={"platforms/" + report.platform + ".svg"} />}
                 </div>
               </td>
-              {/* <td className="p-2">{report.confidence}</td> */}
-              <td className="p-2 whitespace-nowrap">{new Date(report.date).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "2-digit" })}</td>
-              <td className="whitespace-nowrap">
-                <p className='text-2xl'>&rarr;</p>
+              <td className="hidden lg:table-cell p-2 font-medium">{new Date(report.date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</td>
+              <td className="lg:hidden p-2 font-medium">{new Date(report.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "2-digit" })}</td>
+              <td className={cn("p-2", (idx + 1) % recordsPerPage === 0 || idx + 1 === report.length ? "rounded-br-sm" : null)}>
+                <Link className='flex justify-center items-center' href={report.link} target="_blank"><ExternalLink className='size-4 lg:size-6'/></Link>
               </td>
             </tr>
           )) : null}

@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
 import Header from "@/components/header";
+import { Toaster } from "sonner";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -57,6 +58,7 @@ export default function RootLayout({
               </footer>
             </div>
           </main>
+        <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>
