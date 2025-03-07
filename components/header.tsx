@@ -43,11 +43,11 @@ export default async function Header() {
 
           <div className="hidden lg:flex lg:ml-10 xl:ml-16 lg:items-center lg:justify-center lg:space-x-8">
             <Link
-              href="#"
+              href="/dashboard"
               className="px-4 py-2 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50"
             >
               {" "}
-              Dashboard{" "}
+              Detect & Report{" "}
             </Link>
 
             <Link
@@ -55,7 +55,7 @@ export default async function Header() {
               className="px-4 py-2 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:text-opacity-50"
             >
               {" "}
-              Community Reports{" "}
+              Community{" "}
             </Link>
 
             {/* <Link href="#" className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50"> Fees </Link> */}
