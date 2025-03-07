@@ -9,8 +9,7 @@ import {
 const P = () =>
   class PipelineSingleton {
     static task: PipelineType = "text-classification";
-    static model: string =
-      "Xenova/bert-base-multilingual-uncased-sentiment";
+    static model: string = "Xenova/bert-base-multilingual-uncased-sentiment";
     static instance: Promise<any> | null = null;
 
     static async getInstance(

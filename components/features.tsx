@@ -54,7 +54,10 @@ export default function Features() {
                 ))}
               </dl>
             </div>
-            <a href="/community" className="text-right font-semibold text-indigo-600">
+            <a
+              href="/community"
+              className="text-right font-semibold text-indigo-600"
+            >
               Explore now &rarr;
             </a>
           </div>
