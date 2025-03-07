@@ -83,16 +83,16 @@ async def fetch_product(url: str = Query(..., title="Product URL", description="
         reviews.append({"content" : temp})
 
     review_head = [head.text.strip() for head in soup.find_all("span", {"data-hook": "review-title"})]
+        # find the missing sg review head
 
-    # find the missing sg review head
-    try:
-        sg_review_head = soup.find("a", {"data-hook": "review-title"}).find_all("span")[-1].text.strip()
-    except:
-        sg_review_head =  "Not found"
-        
-    review_head.insert(0, sg_review_head)
+    sg_review_head = [
+        head.find_all("span")[-1].text.strip() 
+        for head in soup.find_all("a", {"data-hook": "review-title"})
+    ]
 
-    for review, head in zip(reviews, review_head):
+    total_review_head = sg_review_head + review_head
+
+    for review, head in zip(reviews, total_review_head):
         review['head'] = head
 
     product_data = {

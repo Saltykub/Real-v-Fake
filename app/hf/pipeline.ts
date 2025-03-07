@@ -10,7 +10,7 @@ const P = () =>
   class PipelineSingleton {
     static task: PipelineType = "text-classification";
     static model: string =
-      "Xenova/distilbert-base-uncased-finetuned-sst-2-english";
+      "Xenova/bert-base-multilingual-uncased-sentiment";
     static instance: Promise<any> | null = null;
 
     static async getInstance(
