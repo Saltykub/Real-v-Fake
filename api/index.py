@@ -77,28 +77,23 @@ async def fetch_product(url: str = Query(..., title="Product URL", description="
     reviews = []
     review_blocks = soup.find_all("span", {"data-hook": "review-body"})
 
-    stars = [star.text.strip() for star in soup.find_all("i", {"data-hook": "cmps-review-star-rating"})]
-
-    for i in stars :
-        if(i == "Next set of slides" or i == "Previous set of slides"):
-            stars.remove(i)
-
     for review in review_blocks:
         temp = review.text.strip()
         temp = temp.replace("\nRead more","").strip()
         reviews.append({"content" : temp})
 
+    review_head = [head.text.strip() for head in soup.find_all("span", {"data-hook": "review-title"})]
+
+    # find the missing sg review head
     try:
-        first_star = soup.find("i", {"data-hook": "cmps-review-star-rating"}).text.strip()
+        sg_review_head = soup.find("a", {"data-hook": "review-title"}).find_all("span")[-1].text.strip()
     except:
-        first_star =  "No rating"
+        sg_review_head =  "Not found"
+        
+    review_head.insert(0, sg_review_head)
 
-    stars.insert(0, first_star)
-
-    for review, star in zip(reviews, stars):
-        star = star[0:3]
-        star = float(star)
-        review["rating"] = star
+    for review, head in zip(reviews, review_head):
+        review['head'] = head
 
     product_data = {
         "Title": title,
