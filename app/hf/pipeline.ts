@@ -5,17 +5,9 @@ import {
   env
 } from "@huggingface/transformers";
 
-import fs from "fs";
 
-
-const cachePath = "/tmp/.cache";
-if (!fs.existsSync(cachePath)) {
-  fs.mkdirSync(cachePath, { recursive: true });
-}
-
-
-env.localModelPath = cachePath;
-env.cacheDir = cachePath;
+env.localModelPath = "/tmp";
+env.cacheDir = "/tmp";
 
 
 env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 // Use single-threaded WASM
