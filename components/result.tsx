@@ -1,8 +1,9 @@
 "use client";
-import { fetcher } from "@/lib/utils";
+import { calculateRealStoreProbability, fetcher } from "@/lib/utils";
 import useSWR from "swr";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Comment from "@/components/comment";
+import { useEffect } from "react";
 
 interface Review {
   content: string;
@@ -21,14 +22,27 @@ interface Product {
 
 interface ResultProps {
   url: string;
+  setResult: (value: number) => void;
 }
 
-export default function Result({ url }: ResultProps) {
+export default function Result({ url, setResult }: ResultProps) {
   console.log("result", url);
   const { data, error, isLoading } = useSWR<Product>(
     `/api/py/getQueryData?url=${url}`,
     fetcher,
   );
+
+  async function cal(data: Product) {
+    const newResult = await calculateRealStoreProbability(data, url)
+    setResult(newResult);
+    console.log("hi", newResult, data);
+  }
+
+  useEffect(() => {
+    if (data) {
+      cal(data)
+    }
+  }, [data])
 
   if (error) return <div>Failed to load product data</div>;
   if (!data || isLoading) {
@@ -73,35 +87,17 @@ export default function Result({ url }: ResultProps) {
 
           <div className="mt-8">
             <ul className="">
-              {data.reviews.map((review) => (
+              {data.reviews ? data.reviews.map((review) => (
                 <Comment
                   key={review.content}
                   header={review.head}
                   content={review.content}
                 />
-              ))}
+              )): null}
             </ul>
           </div>
         </div>
       </div>
-      {/* 
-      <Card className="w-[600px] flex flex-col">
-        <CardHeader>
-          <CardTitle>{data.title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          Price = {data.price}
-          <div>
-            {data.reviews.map((review, idx) => (
-              <Comment
-                key={review.content}
-                header={review.head}
-                content={review.content}
-              />
-            ))}
-          </div>
-        </CardContent>
-      </Card> */}
     </div>
   );
 }

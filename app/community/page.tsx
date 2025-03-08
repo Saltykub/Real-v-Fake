@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 
 const statusColors = (c: number): string | null => {
   let ret = null;
-  if (c >= 0.8) ret = "bg-green-50 text-green-700";
-  else if (c >= 0.6) ret = "bg-yellow-50 text-yellow-700";
-  else if (c >= 0.4) ret = "bg-orange-100 text-orange-700";
+  if (c >= 0.8) ret = "bg-green-100 text-green-700";
+  else if (c >= 0.6) ret = "bg-lime-100 text-lime-700";
+  else if (c >= 0.4) ret = "bg-yellow-100 text-yellow-700";
+  else if (c >= 0.2) ret = "bg-orange-100 text-orange-700";
   else ret = "bg-red-100 text-red-700";
   return ret;
 };

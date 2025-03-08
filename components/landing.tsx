@@ -1,4 +1,15 @@
+"use client";
+import { redirect } from "next/navigation";
+import { useState } from "react";
+
 export default function Landing() {
+  const [queryLink, setQueryLink] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    redirect(`/dashboard?link=${encodeURIComponent(queryLink)}`);
+  };
+
   return (
     <section className="relative py-12 sm:py-16 lg:py-8 lg:pb-36">
       <div className="absolute inset-0 -z-10">
@@ -56,12 +67,14 @@ export default function Landing() {
                 detection.
               </p>
 
-              <form action="#" method="POST" className="bg-white mt-8 sm:mt-10">
+              <form onSubmit={handleSubmit} className="bg-white mt-8 sm:mt-10">
                 <div className="relative p-2 sm:border sm:border-gray-400 group sm:rounded-xl sm:focus-within:ring-1 sm:focus-within:ring-gray-900 sm:focus-within:border-gray-900">
                   <input
-                    type="email"
-                    name=""
-                    id=""
+                    type="url"
+                    value={queryLink}
+                    onChange={(e) => setQueryLink(e.target.value)}
+                    name="link"
+                    id="link"
                     placeholder="Enter product link"
                     className="block w-full px-4 py-4 text-gray-900 placeholder-gray-500 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
                   />

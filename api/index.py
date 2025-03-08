@@ -1,3 +1,4 @@
+import re
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
@@ -59,6 +60,7 @@ async def fetch_product(url: str = Query(..., title="Product URL", description="
         review_count = soup.find("span", {"id": "acrCustomerReviewText"}).text.strip()
         review_sz = len(review_count)
         review_count = review_count[0:review_sz-8]
+        review_count = re.sub(r"[^\d]", "", review_count)
         review_count = int(review_count)
     except:
         review_count = "No reviews"
