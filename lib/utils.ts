@@ -2,6 +2,21 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import OpenAI from "openai";
 
+interface Review {
+  content: string;
+  head: string;
+}
+
+interface Product {
+  title: string;
+  price: number;
+  rating: number;
+  totalReviews: number;
+  description: string;
+  reviews: Review[];
+  imageUrl: string;
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -70,3 +85,38 @@ export const chatgpt = async (text: string): Promise<string> => {
     return "Error processing request.";
   }
 };
+
+const classify = async (text: string): Promise<boolean> => {
+  if (!text) return false; // Default to false if text is empty
+
+  try {
+    const response = await fetch(`/hf?text=${encodeURIComponent(text)}`);
+    const json = await response.json();
+
+    // Assume API returns { label: "positive" | "negative", score: number }
+    return json.label === "positive"; // Return true for positive reviews
+  } catch (error) {
+    console.error("Error fetching classification:", error);
+    return false; // Default to negative if there's an error
+  }
+};
+
+export const  calculateRealStoreProbability = async (product: Product): Promise<number> => {
+  const C = 50; 
+  const w1 = 0.4, w2 = 0.4, w3 = 0.2; // Weights
+
+  const f_reviews = product.totalReviews / (product.totalReviews + C);
+
+  const f_rating = (product.rating - 1) / 4;
+
+  const classificationResults = await Promise.all(
+    product.reviews.map(review => classify(review.content)) // Using updated classify function
+  );
+
+  const positiveReviews = classificationResults.filter(isPositive => isPositive).length;
+  const f_review_content = product.totalReviews > 0 ? positiveReviews / product.totalReviews : 0;
+
+  const P_real = w1 * f_reviews + w2 * f_rating + w3 * f_review_content;
+  return Math.min(1, Math.max(0, P_real)); 
+}
+

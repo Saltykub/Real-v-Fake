@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { chatgpt } from "@/lib/utils";
 
+
 export default function Temp2(content: string) {
   const [result, setResult] = useState<{ label: string; score: number } | null>(
     null,
