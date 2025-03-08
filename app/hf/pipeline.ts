@@ -2,10 +2,11 @@ import {
   pipeline,
   PipelineType,
   ProgressCallback,
+  env
 } from "@huggingface/transformers";
 
-// Use the Singleton pattern to enable lazy construction of the pipeline.
-// NOTE: We wrap the class in a function to prevent code duplication (see below).
+env.localModelPath = "/tmp";
+env.cacheDir = "/tmp";
 const P = () =>
   class PipelineSingleton {
     static task: PipelineType = "text-classification";
