@@ -24,6 +24,7 @@ import { FormMessage, Message } from "@/components/form-message";
 import { toast } from "sonner";
 import { createClient } from "@/utils/supabase/client";
 import { cn } from "@/lib/utils";
+import Result from "@/components/result";
 
 const platforms = ["Amazon", "Lazada", "Shopee", "TikTokShop", "Etsy", "Other"];
 
@@ -188,7 +189,7 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
                     <Input
                       id="link"
                       name="link"
-                      type="text"
+                      type="url"
                       placeholder="Enter link to shop/product"
                       required
                     />
@@ -214,7 +215,9 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
           </TabsContent>
         </Tabs>
       </div>
-      <div className={cn(detect ? "block" : "hidden")}>Hi</div>
+      <div className={cn(detect ? "block" : "hidden")}>
+        <Result url="https://www.amazon.sg/Nutrition-Micronized-Monohydrate-Unflavored-Packaging/dp/B002DYIZEO/ref=pd_rhf_dp_s_pd_crcbs_d_sccl_2_2/356-2430150-7074413?pd_rd_w=0Ar5i&content-id=amzn1.sym.bf924764-6bd5-4b1e-bace-6b08a062f0fa&pf_rd_p=bf924764-6bd5-4b1e-bace-6b08a062f0fa&pf_rd_r=79ZQJ8H8B75FQEQBQJNX&pd_rd_wg=ecaPR&pd_rd_r=e4d43ef4-ead5-460b-b10f-ed8cbde035e5&pd_rd_i=B002DYIZEO&th=1"/>
+      </div>
     </div>
   );
 }

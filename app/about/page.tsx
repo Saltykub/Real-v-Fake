@@ -29,7 +29,7 @@ export default function About() {
       <div className="flex justify-between w-[700px] mt-20">
         <Profile url="test" name="Peeranat Kongkipipat" course="BCG/2" />
         <Profile url="test" name="Plengpin Tongdon-ngao" course="CE/1" />
-        <Profile url="test" name="Kulpatch Chananum" course="CSEC/2" />
+        <Profile url="test" name="Kulpatch Chananam" course="CSEC/2" />
         <Profile url="test" name="Nathan Juirnarongrit" course="BCE/2" />
       </div>
     </div>
