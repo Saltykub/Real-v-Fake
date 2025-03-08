@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const statusColors = (c: number): string | null => {
-  console.log(c);
   let ret = null;
   if (c >= 0.8) ret = "bg-green-50 text-green-700";
   else if (c >= 0.6) ret = "bg-yellow-50 text-yellow-700";

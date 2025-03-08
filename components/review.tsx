@@ -7,21 +7,22 @@ export default function Review() {
         <div className="flex flex-col items-center">
           <div className="text-center">
             <p className="text-lg font-medium text-gray-600 font-pj">
-              2,157 people have said how good Rareblocks
+              Many people have said how good Real v Fake
             </p>
             <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl font-pj">
-              Our happy clients say about us
+              What happy users say about us
             </h2>
           </div>
 
           <div className="mt-8 text-center md:mt-16 md:order-3">
             <a
-              href="#"
+              href="/dashboard"
               title=""
               className="pb-2 text-base font-bold leading-7 text-gray-900 transition-all duration-200 border-b-2 border-gray-900 hover:border-gray-600 font-pj focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 hover:text-gray-600"
             >
               {" "}
-              Check all 2,157 reviews{" "}
+              {/* Check all 2,157 reviews{" "} */}
+              Try our app now!{" "}
             </a>
           </div>
 
@@ -85,9 +86,7 @@ export default function Review() {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “You made it so simple. My new site is so much faster
-                        and easier to work with than my old site. I just choose
-                        the page, make the change.”
+                        “I was about to purchase a laptop from an online store, but I had a bad feeling. I used this app to check, and it flagged the store as suspicious! Turns out, other users had reported it as a scam. Thanks to this app, I avoided losing my money!”
                       </p>
                     </blockquote>
                   </div>
@@ -103,7 +102,7 @@ export default function Review() {
                         Leslie Alexander
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Freelance React Developer
+                        Verified Shopper
                       </p>
                     </div>
                   </div>
@@ -158,8 +157,7 @@ export default function Review() {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “Simply the best. Better than all the rest. I’d
-                        recommend this product to beginners and advanced users.”
+                        “I love how easy it is to check if a store is legit. The AI detection works great, and I also get to see reports from real users. I even reported a fake seller myself, and it felt great to help the community!”
                       </p>
                     </blockquote>
                   </div>
@@ -175,7 +173,7 @@ export default function Review() {
                         Jacob Jones
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Digital Marketer
+                        Frequent Online Buyer
                       </p>
                     </div>
                   </div>
@@ -230,9 +228,7 @@ export default function Review() {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “I cannot believe that I have got a brand new landing
-                        page after getting Omega. It was super easy to edit and
-                        publish.”
+                        “I shop a lot on different platforms like Amazon, Shopee, and Lazada. This app gives me peace of mind by quickly checking if a shop is trustworthy. It's like having a personal fraud detector in my pocket!”
                       </p>
                     </blockquote>
                   </div>
@@ -248,7 +244,7 @@ export default function Review() {
                         Jenny Wilson
                       </p>
                       <p className="mt-0.5 text-sm font-pj text-gray-600">
-                        Graphic Designer
+                        Online Shopping Enthusiast
                       </p>
                     </div>
                   </div>

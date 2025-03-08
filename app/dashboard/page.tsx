@@ -32,6 +32,7 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
   const supabase = createClient();
   const [platform, setPlatform] = useState<string>("");
   const [detect, setDetect] = useState<boolean>(false);
+  const [productLink, setProductLink] = useState<string | null>(null);
   const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
@@ -47,12 +48,12 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
   }, []);
 
   async function handleDetect(formData: FormData) {
-    const product = formData.get("product") as string;
     const link = formData.get("link") as string;
 
-    console.log("Detecting:", { product, platform, link });
+    console.log("Detecting:", { platform, link });
     // Add your API call here
     setDetect(true);
+    setProductLink(link);
   }
 
   async function handleReport(formData: FormData) {
@@ -75,148 +76,143 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
 
   return (
     <div className="mt-4 w-screen mx-auto flex flex-col items-center lg:flex-row lg:items-start lg:justify-around">
-      <div className={cn(detect && "cursor-not-allowed opacity-60")}>
-        <Tabs defaultValue="detect" className="p-4 lg:p-0 w-[400px]">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger disabled={detect} value="detect">
-              Detect
-            </TabsTrigger>
-            <TabsTrigger disabled={detect} value="report">
-              Report
-            </TabsTrigger>
-          </TabsList>
+      <div className="flex flex-col gap-4 px-4 lg:px-0 lg:w-1/3 max-w-[450px]">
+        <div className={cn(detect && "cursor-not-allowed opacity-60")}>
+          <Tabs defaultValue="detect" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger disabled={detect} value="detect">
+                Detect
+              </TabsTrigger>
+              <TabsTrigger disabled={detect} value="report">
+                Report
+              </TabsTrigger>
+            </TabsList>
 
-          {/* Fake Shop Detection */}
-          <TabsContent value="detect">
-            <Card>
-              <CardHeader>
-                <CardTitle>Fake Shop Detection</CardTitle>
-                <CardDescription>
-                  Input the link to the product on any online shopping platform
-                  to check the reliability of the shop.
-                </CardDescription>
-              </CardHeader>
-              <form action={handleDetect}>
-                <CardContent className="space-y-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="product">Product Name</Label>
-                    <Input
+            {/* Fake Shop Detection */}
+            <TabsContent value="detect">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Fake Shop Detection</CardTitle>
+                  <CardDescription>
+                    Input the link to the product on any online shopping platform
+                    to check the reliability of the shop.
+                  </CardDescription>
+                </CardHeader>
+                <form action={handleDetect}>
+                  <CardContent className="space-y-2">
+                    <div className="space-y-1">
+                      <Label htmlFor="platform">Platform</Label>
+                      <Select disabled={detect} onValueChange={setPlatform}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Which platform?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {platforms.map((platform) => (
+                            <SelectItem key={platform} value={platform}>
+                              {platform}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="link">Link</Label>
+                      <Input
+                        disabled={detect}
+                        id="link"
+                        name="link"
+                        type="url"
+                        placeholder="Enter link to product"
+                        required
+                      />
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <SubmitButton
                       disabled={detect}
-                      id="product"
-                      name="product"
-                      placeholder="Enter product name"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="platform">Platform</Label>
-                    <Select disabled={detect} onValueChange={setPlatform}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Which platform?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {platforms.map((platform) => (
-                          <SelectItem key={platform} value={platform}>
-                            {platform}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="link">Link</Label>
-                    <Input
-                      disabled={detect}
-                      id="link"
-                      name="link"
-                      type="url"
-                      placeholder="Enter link to product"
-                      required
-                    />
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <SubmitButton
-                    disabled={detect}
-                    pendingText="Loading..."
-                    className="w-full"
-                  >
-                    Check
-                  </SubmitButton>
-                </CardFooter>
-              </form>
-            </Card>
-          </TabsContent>
+                      pendingText="Loading..."
+                      className="w-full"
+                    >
+                      Check
+                    </SubmitButton>
+                  </CardFooter>
+                </form>
+              </Card>
+            </TabsContent>
 
-          {/* Report Fake Shop */}
-          <TabsContent value="report">
-            <Card>
-              <CardHeader>
-                <CardTitle>Report Fake Shop</CardTitle>
-                <CardDescription>
-                  Expose the fake shop to help our community!
-                </CardDescription>
-              </CardHeader>
-              <form action={handleReport}>
-                <CardContent className="space-y-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="shop">Shop Name</Label>
-                    <Input
-                      id="shop"
-                      name="shop"
-                      type="text"
-                      placeholder="Enter shop name"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="platform">Platform</Label>
-                    <Select onValueChange={setPlatform}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Which platform?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {platforms.map((platform) => (
-                          <SelectItem key={platform} value={platform}>
-                            {platform}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="link">Link</Label>
-                    <Input
-                      id="link"
-                      name="link"
-                      type="url"
-                      placeholder="Enter link to shop/product"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="description">Description</Label>
-                    <Input
-                      id="description"
-                      name="description"
-                      type="text"
-                      placeholder="What happened?"
-                      required
-                    />
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <SubmitButton pendingText="Loading..." className="w-full">
-                    Report
-                  </SubmitButton>
-                </CardFooter>
-              </form>
-            </Card>
-          </TabsContent>
-        </Tabs>
+            {/* Report Fake Shop */}
+            <TabsContent value="report">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Report Fake Shop</CardTitle>
+                  <CardDescription>
+                    Expose the fake shop to help our community!
+                  </CardDescription>
+                </CardHeader>
+                <form action={handleReport}>
+                  <CardContent className="space-y-2">
+                    <div className="space-y-1">
+                      <Label htmlFor="shop">Shop Name</Label>
+                      <Input
+                        id="shop"
+                        name="shop"
+                        type="text"
+                        placeholder="Enter shop name"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="platform">Platform</Label>
+                      <Select onValueChange={setPlatform}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Which platform?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {platforms.map((platform) => (
+                            <SelectItem key={platform} value={platform}>
+                              {platform}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="link">Link</Label>
+                      <Input
+                        id="link"
+                        name="link"
+                        type="url"
+                        placeholder="Enter link to shop/product"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <Label htmlFor="description">Description</Label>
+                      <Input
+                        id="description"
+                        name="description"
+                        type="text"
+                        placeholder="What happened?"
+                        required
+                      />
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <SubmitButton pendingText="Loading..." className="w-full">
+                      Report
+                    </SubmitButton>
+                  </CardFooter>
+                </form>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+        <div className={cn(detect ? "block" : "hidden")}>
+          Hi, result here
+        </div>
       </div>
-      <div className={cn(detect ? "block" : "hidden")}>
-        <Result url="https://www.amazon.sg/Nutrition-Micronized-Monohydrate-Unflavored-Packaging/dp/B002DYIZEO/ref=pd_rhf_dp_s_pd_crcbs_d_sccl_2_2/356-2430150-7074413?pd_rd_w=0Ar5i&content-id=amzn1.sym.bf924764-6bd5-4b1e-bace-6b08a062f0fa&pf_rd_p=bf924764-6bd5-4b1e-bace-6b08a062f0fa&pf_rd_r=79ZQJ8H8B75FQEQBQJNX&pd_rd_wg=ecaPR&pd_rd_r=e4d43ef4-ead5-460b-b10f-ed8cbde035e5&pd_rd_i=B002DYIZEO&th=1"/>
+      <div className={cn(detect ? "block" : "hidden", "lg:w-1/2")}>
+        {detect && productLink && <Result url={productLink}/>}
       </div>
     </div>
   );
