@@ -62,15 +62,13 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
     const description = formData.get("description") as string;
 
     console.log("Reporting:", { shop, platform, link, description }, user);
-    const { error } = await supabase
-      .from("reports")
-      .insert({
-        user: user,
-        shop: shop,
-        platform: platform,
-        link: link,
-        confidence: 0,
-      });
+    const { error } = await supabase.from("reports").insert({
+      user: user,
+      shop: shop,
+      platform: platform,
+      link: link,
+      confidence: 0,
+    });
     if (!error) toast.success("Fake shop has been reported. Thank You!");
   }
 
@@ -94,8 +92,8 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
                 <CardHeader>
                   <CardTitle>Fake Shop Detection</CardTitle>
                   <CardDescription>
-                    Input the link to the product on any online shopping platform
-                    to check the reliability of the shop.
+                    Input the link to the product on any online shopping
+                    platform to check the reliability of the shop.
                   </CardDescription>
                 </CardHeader>
                 <form action={handleDetect}>
@@ -207,12 +205,10 @@ export default function Dashboard(props: { searchParams: Promise<Message> }) {
             </TabsContent>
           </Tabs>
         </div>
-        <div className={cn(detect ? "block" : "hidden")}>
-          Hi, result here
-        </div>
+        <div className={cn(detect ? "block" : "hidden")}>Hi, result here</div>
       </div>
       <div className={cn(detect ? "block" : "hidden", "lg:w-1/2")}>
-        {detect && productLink && <Result url={productLink}/>}
+        {detect && productLink && <Result url={productLink} />}
       </div>
     </div>
   );

@@ -86,7 +86,11 @@ export default function Review() {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “I was about to purchase a laptop from an online store, but I had a bad feeling. I used this app to check, and it flagged the store as suspicious! Turns out, other users had reported it as a scam. Thanks to this app, I avoided losing my money!”
+                        “I was about to purchase a laptop from an online store,
+                        but I had a bad feeling. I used this app to check, and
+                        it flagged the store as suspicious! Turns out, other
+                        users had reported it as a scam. Thanks to this app, I
+                        avoided losing my money!”
                       </p>
                     </blockquote>
                   </div>
@@ -157,7 +161,10 @@ export default function Review() {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “I love how easy it is to check if a store is legit. The AI detection works great, and I also get to see reports from real users. I even reported a fake seller myself, and it felt great to help the community!”
+                        “I love how easy it is to check if a store is legit. The
+                        AI detection works great, and I also get to see reports
+                        from real users. I even reported a fake seller myself,
+                        and it felt great to help the community!”
                       </p>
                     </blockquote>
                   </div>
@@ -228,7 +235,10 @@ export default function Review() {
 
                     <blockquote className="flex-1 mt-8">
                       <p className="text-lg leading-relaxed text-gray-900 font-pj">
-                        “I shop a lot on different platforms like Amazon, Shopee, and Lazada. This app gives me peace of mind by quickly checking if a shop is trustworthy. It's like having a personal fraud detector in my pocket!”
+                        “I shop a lot on different platforms like Amazon,
+                        Shopee, and Lazada. This app gives me peace of mind by
+                        quickly checking if a shop is trustworthy. It's like
+                        having a personal fraud detector in my pocket!”
                       </p>
                     </blockquote>
                   </div>

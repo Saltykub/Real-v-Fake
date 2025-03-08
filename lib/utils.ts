@@ -57,7 +57,7 @@ export const chatgpt = async (text: string): Promise<string> => {
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: systemPrompt },
-        { role: "user", content: `Analyze this text: "${text}"` }, 
+        { role: "user", content: `Analyze this text: "${text}"` },
       ],
     });
 
@@ -67,6 +67,3 @@ export const chatgpt = async (text: string): Promise<string> => {
     return "Error processing request.";
   }
 };
-
-
-
