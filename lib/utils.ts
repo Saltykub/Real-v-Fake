@@ -39,6 +39,9 @@ Use the following steps to analyze the text:
    - AI-generated text often **lacks creativity** beyond known patterns and tends to provide **generalized statements**.  
    - Human-written content contains **unpredictable, creative, and contextually unique** elements.  
 
+6. **Overly Polished & Structured **
+   - The review flows exceptionally well, with clear sections marked by asterisks (*) and bold headings (**), which is common in AI-generated marketing or promotional content.
+
 The input will be in format of "Analyze this text: {DESIRE_TEXT}"
 When you analyze all the information you need to output 
 (1) AI generated or human written in format of "This text is likely to be: XXX"

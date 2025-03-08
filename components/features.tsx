@@ -1,4 +1,5 @@
 import { BadgeCheck, MessageSquareWarning, UsersRound } from "lucide-react";
+import Link from "next/link";
 
 const features = [
   {
@@ -54,12 +55,12 @@ export default function Features() {
                 ))}
               </dl>
             </div>
-            <a
+            <Link
               href="/community"
-              className="text-right font-semibold text-indigo-600"
+              className="text-right font-semibold text-indigo-600 hover:text-indigo-500 hover:underline underline-offset-8"
             >
               Explore now &rarr;
-            </a>
+            </Link>
           </div>
           <div className="">
             <img
