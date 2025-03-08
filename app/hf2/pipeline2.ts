@@ -6,9 +6,9 @@ import {
 } from "@huggingface/transformers";
 
 
-env.localModelPath = "/tmp";
-env.cacheDir = "/tmp";
-env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 
+// env.localModelPath = "/tmp";
+// env.cacheDir = "/tmp";
+// env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 
 
 const P = () =>
   class PipelineSingleton2 {
