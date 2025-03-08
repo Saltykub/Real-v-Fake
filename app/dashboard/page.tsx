@@ -59,8 +59,6 @@ const textColors: Record<string, string> = {
 
 
 export default function Dashboard() {
-  const searchParams = useSearchParams();
-  const queryLink = searchParams.get("link") || "";
   const supabase = createClient();
   const [platform, setPlatform] = useState<string | null>(null);
   const [detect, setDetect] = useState<boolean>(false);
@@ -70,6 +68,12 @@ export default function Dashboard() {
   const [result, setResult] = useState<number | null>(null);
   const [color, setColor] = useState<string>("gray");
   const [added, setAdded] = useState<boolean>(false);
+  const [queryLink, setQueryLink] = useState<string>("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setQueryLink(params.get("link") || "");
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
