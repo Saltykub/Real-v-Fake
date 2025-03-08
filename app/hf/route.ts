@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server";
 import PipelineSingleton from "./pipeline";
 
-export const runtime = "edge";
-
-(async () => {
-  await PipelineSingleton.getInstance();
-})();
-
 export async function GET(request: any) {
   const text = request.nextUrl.searchParams.get("text");
   if (!text) {
