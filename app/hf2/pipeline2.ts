@@ -2,10 +2,22 @@ import {
   pipeline,
   PipelineType,
   ProgressCallback,
+  env
 } from "@huggingface/transformers";
+import fs from "fs";
 
-// Use the Singleton pattern to enable lazy construction of the pipeline.
-// NOTE: We wrap the class in a function to prevent code duplication (see below).
+
+const cachePath = "/tmp/.cache";
+if (!fs.existsSync(cachePath)) {
+  fs.mkdirSync(cachePath, { recursive: true });
+}
+
+
+env.localModelPath = cachePath;
+env.cacheDir = cachePath;
+
+
+env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 // Use single-threaded WASM
 const P = () =>
   class PipelineSingleton2 {
     static task: PipelineType = "text-classification";
