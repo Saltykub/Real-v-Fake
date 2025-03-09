@@ -1,10 +1,9 @@
 import {
   pipeline,
   PipelineType,
-} from "@xenova/transformers";
-import {
   ProgressCallback,
 } from "@huggingface/transformers";
+
 
 // env.localModelPath = "/tmp";
 // env.cacheDir = "/tmp";

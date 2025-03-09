@@ -1,8 +1,6 @@
 import {
   pipeline,
   PipelineType,
-} from "@xenova/transformers";
-import {
   ProgressCallback,
 } from "@huggingface/transformers";
 
