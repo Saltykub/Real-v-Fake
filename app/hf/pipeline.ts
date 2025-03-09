@@ -21,7 +21,7 @@ const P = () =>
       progress_callback: ProgressCallback | undefined = undefined,
     ): Promise<any> {
       if (this.instance === null) {
-        this.instance = pipeline(this.task, this.model, { progress_callback, dtype:"fp16"});
+        this.instance = pipeline(this.task, this.model, { progress_callback, dtype:"int8"});
       }
       return this.instance;
     }
