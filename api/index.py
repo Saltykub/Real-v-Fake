@@ -1,4 +1,6 @@
+import random
 import re
+import time
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
@@ -20,12 +22,21 @@ def hello_fast_api():
 
 @app.get("/api/py/getQueryData")
 async def fetch_product(url: str = Query(..., title="Product URL", description="Amazon product link")):
+    USER_AGENTS = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.90 Safari/537.36",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/537.36"
+    ]
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+        "User-Agent": random.choice(USER_AGENTS),
         "Accept-Language": "en-US,en;q=0.5"
     }
 
+    delay = random.uniform(1, 5)  # Random delay between 1-5 seconds
+    time.sleep(delay)
+    
     # Send GET Request
     async with httpx.AsyncClient() as client:
             response = await client.get(url, headers=headers)
