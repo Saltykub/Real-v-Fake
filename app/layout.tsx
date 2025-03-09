@@ -33,6 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/icon.png" type="image/png" sizes="36" />
+      </head>
       <body className="bg-background text-foreground">
         <ThemeProvider
           attribute="class"
