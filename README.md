@@ -24,9 +24,11 @@
   - Review Tone Analysis: [Xenova/distilbert-base-uncased-finetuned-sst-2-english](https://huggingface.co/Xenova/distilbert-base-uncased-finetuned-sst-2-english)
   - AI-Generated Detection: [openai-community/roberta-base-openai-detector](https://huggingface.co/openai-community/roberta-base-openai-detector)
   - Classification Model with ChatGPT Feature Engineering
+
 ![detect](public/detect.png)
 
 - **Community Database:** users can report fake shops, which will be added to our database shown to all users
+
 ![community](/public/community.png)
 
 ## Demo
