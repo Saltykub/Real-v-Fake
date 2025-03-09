@@ -5,11 +5,14 @@ import {
   env,
 } from "@huggingface/transformers";
 
-
+export const config = {
+  runtime: "edge", // Enables edge execution
+};
 
 env.localModelPath = "/tmp";
 env.cacheDir = "/tmp";
 env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 
+env.backends.onnx.enabled = true;
 
 const P = () =>
   class PipelineSingleton {
@@ -21,7 +24,7 @@ const P = () =>
       progress_callback: ProgressCallback | undefined = undefined,
     ): Promise<any> {
       if (this.instance === null) {
-        this.instance = pipeline(this.task, this.model, { progress_callback, dtype:"int8"});
+        this.instance = pipeline(this.task, this.model, { progress_callback, dtype: "fp16"});
       }
       return this.instance;
     }

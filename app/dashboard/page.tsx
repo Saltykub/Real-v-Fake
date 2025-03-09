@@ -186,6 +186,7 @@ export default function Dashboard() {
                         type="text"
                         placeholder="Enter shop name"
                         required
+                        disabled={detect}
                       />
                     </div>
                     <div className="space-y-1">
@@ -346,10 +347,10 @@ export default function Dashboard() {
           </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4 w-full">
-            <Button onClick={doneDetect} variant="outline" className="w-full">Back</Button>
-            <Button onClick={addToSupabase} disabled={added} className="w-full relative font-bold">
-              {!added ?
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+            <Button onClick={doneDetect} disabled={result === null} variant="outline" className="transition-all w-full">Back</Button>
+            <Button onClick={addToSupabase} disabled={added || result === null} className="transition-all w-full relative font-bold">
+              {!added && result !== null ?
+              <span className="transition-all absolute -top-1 -right-1 flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span> : null}
