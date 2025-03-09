@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  serverExternalPackages: ['sharp', 'onnxruntime-node'],
+ serverExternalPackages: ['sharp', 'onnxruntime-node'], 
   rewrites: async () => {
     return [
       {

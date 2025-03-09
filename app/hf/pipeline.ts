@@ -2,14 +2,15 @@ import {
   pipeline,
   PipelineType,
   ProgressCallback,
+  env,
 } from "@huggingface/transformers";
 
 
-// env.localModelPath = "/tmp";
-// env.cacheDir = "/tmp";
 
+env.localModelPath = "/tmp";
+env.cacheDir = "/tmp";
+env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 
 
-// env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 // Use single-threaded WASM
 const P = () =>
   class PipelineSingleton {
     static task: PipelineType = "text-classification";

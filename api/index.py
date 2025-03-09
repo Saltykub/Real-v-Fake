@@ -110,3 +110,4 @@ async def fetch_product(url: str = Query(..., title="Product URL", description="
     return product_data
 
 
+
