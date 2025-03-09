@@ -5,6 +5,7 @@ from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import httpx
 from bs4 import BeautifulSoup
+
 ### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
 
@@ -16,12 +17,8 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-@app.get("/api/py/helloFastApi")
-def hello_fast_api():
-    return {"message": "Hello from FastAPI"}
-
-@app.get("/api/py/getQueryData")
-async def fetch_product(url: str = Query(..., title="Product URL", description="Amazon product link")):
+# Rotate User-Agents and Headers
+def get_headers():
     USER_AGENTS = [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.90 Safari/537.36",
@@ -31,15 +28,34 @@ async def fetch_product(url: str = Query(..., title="Product URL", description="
 
     headers = {
         "User-Agent": random.choice(USER_AGENTS),
-        "Accept-Language": "en-US,en;q=0.5"
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Referer": "https://www.google.com/",
+        "DNT": "1",  # Do Not Track
+        "Connection": "keep-alive"
     }
+    return headers
 
-    delay = random.uniform(1, 5)  # Random delay between 1-5 seconds
-    time.sleep(delay)
-    
+@app.get("/api/py/helloFastApi")
+def hello_fast_api():
+    return {"message": "Hello from FastAPI"}
+
+@app.get("/api/py/getQueryData")
+async def fetch_product(url: str = Query(..., title="Product URL", description="Amazon product link")):
+    proxy_list = [
+        "http://user:password@proxy1:port",
+        "http://user:password@proxy2:port",
+        "http://user:password@proxy3:port",
+    ]
+
+    proxy = random.choice(proxy_list) if proxy_list else None
+    proxies = {"http://": proxy, "https://": proxy} if proxy else None
+
+    headers = get_headers()
+
     # Send GET Request
     async with httpx.AsyncClient() as client:
-            response = await client.get(url, headers=headers)
+            response = await client.get(url, headers=headers, follow_redirects=True)
 
     if response.status_code != 200:
         return {"error": f"Failed to fetch product page. HTTP Status: {response.status_code}"}
