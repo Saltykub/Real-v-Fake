@@ -190,7 +190,7 @@ export default function Dashboard() {
                     </div>
                     <div className="space-y-1">
                       <Label htmlFor="platform">Platform</Label>
-                      <Select disabled={detect} onValueChange={setPlatform}>
+                      <Select disabled={detect} onValueChange={setPlatform} required>
                         <SelectTrigger>
                           <SelectValue placeholder="Which platform?" />
                         </SelectTrigger>
@@ -252,7 +252,7 @@ export default function Dashboard() {
                     </div>
                     <div className="space-y-1">
                       <Label htmlFor="platform">Platform</Label>
-                      <Select onValueChange={setPlatform}>
+                      <Select onValueChange={setPlatform} required>
                         <SelectTrigger>
                           <SelectValue placeholder="Which platform?" />
                         </SelectTrigger>
