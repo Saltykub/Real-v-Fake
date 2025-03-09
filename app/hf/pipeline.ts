@@ -24,7 +24,7 @@ const P = () =>
       progress_callback: ProgressCallback | undefined = undefined,
     ): Promise<any> {
       if (this.instance === null) {
-        this.instance = pipeline(this.task, this.model, { progress_callback, dtype: "fp16", device: "webgpu" });
+        this.instance = pipeline(this.task, this.model, { progress_callback, dtype: "q8" });
       }
       return this.instance;
     }
