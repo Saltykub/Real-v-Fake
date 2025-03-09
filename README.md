@@ -1,4 +1,4 @@
-<img alt="Real v Fake" src="/public/banner.png"/>
+<a href="https://realvfake.vercel.app"><img alt="Real v Fake" src="/public/banner.png"/></a>
 <h1 align="center">SCDS TechFest Hackathon 2025 - Team 9: Real v Fake</h1>
 
 <p align="center">
@@ -33,11 +33,13 @@
 
 ## Demo
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+You can view a fully working demo on [YouTube](https://youtu.be/Sp98-4H2ktw).
 
 ## Visit Us
 
 To try Real v Fake, visit our website: [https://realvfake.vercel.app](https://realvfake.vercel.app/).
+> Use **Email: admin@test.com, Password: password** to sign in on our deployed website
+
 > Due to privacy policies, our website can only be applied to Amazon website
 
 > The sentimental analysis model may face Vercel server runtimes limit, so the results may not fully display
