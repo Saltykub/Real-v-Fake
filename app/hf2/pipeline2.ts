@@ -2,13 +2,12 @@ import {
   pipeline,
   PipelineType,
   ProgressCallback,
-  env
+  env,
 } from "@huggingface/transformers";
-
 
 env.localModelPath = "/tmp";
 env.cacheDir = "/tmp";
-env.backends.onnx.wasm ? env.backends.onnx.wasm.numThreads = 1 : 0 
+env.backends.onnx.wasm ? (env.backends.onnx.wasm.numThreads = 1) : 0;
 
 const P = () =>
   class PipelineSingleton2 {
@@ -21,7 +20,10 @@ const P = () =>
       progress_callback: ProgressCallback | undefined = undefined,
     ): Promise<any> {
       if (this.instance === null) {
-        this.instance = pipeline(this.task, this.model, { progress_callback, dtype:"q4f16"});
+        this.instance = pipeline(this.task, this.model, {
+          progress_callback,
+          dtype: "q4f16",
+        });
       }
       return this.instance;
     }

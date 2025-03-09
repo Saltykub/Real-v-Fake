@@ -33,16 +33,16 @@ export default function Result({ url, setResult }: ResultProps) {
   );
 
   async function cal(data: Product) {
-    const newResult = await calculateRealStoreProbability(data, url)
+    const newResult = await calculateRealStoreProbability(data, url);
     setResult(newResult);
     console.log("hi", newResult, data);
   }
 
   useEffect(() => {
     if (data) {
-      cal(data)
+      cal(data);
     }
-  }, [data])
+  }, [data]);
 
   if (error) return <div>Failed to load product data</div>;
   if (!data || isLoading) {
@@ -87,13 +87,15 @@ export default function Result({ url, setResult }: ResultProps) {
 
           <div className="mt-8">
             <ul className="">
-              {data.reviews ? data.reviews.map((review) => (
-                <Comment
-                  key={review.content}
-                  header={review.head}
-                  content={review.content}
-                />
-              )): null}
+              {data.reviews
+                ? data.reviews.map((review) => (
+                    <Comment
+                      key={review.content}
+                      header={review.head}
+                      content={review.content}
+                    />
+                  ))
+                : null}
             </ul>
           </div>
         </div>

@@ -138,27 +138,36 @@ const classify = async (text: string): Promise<boolean> => {
   }
 };
 
-export const calculateRealStoreProbability = async (product: Product, url: string): Promise<number> => {
-  const C = 50; 
-  const w1 = 0.4, w2 = 0.3, w3 = 0.1, w4 = 0.2; // Weights
+export const calculateRealStoreProbability = async (
+  product: Product,
+  url: string,
+): Promise<number> => {
+  const C = 50;
+  const w1 = 0.4,
+    w2 = 0.3,
+    w3 = 0.1,
+    w4 = 0.2; // Weights
 
   const f_reviews = product.totalReviews / (product.totalReviews + C);
 
   const f_rating = (product.rating - 1) / 4;
 
   const classificationResults = await Promise.all(
-    product.reviews.map(review => classify(review.content)) // Using updated classify function
+    product.reviews.map((review) => classify(review.content)), // Using updated classify function
   );
 
   const chat = await chatgpt2(url);
   const f_chat = Number(chat);
 
-  const positiveReviews = classificationResults.filter(isPositive => isPositive).length;
-  const f_review_content = product.reviews.length > 0 ? positiveReviews / product.reviews.length : 0;
+  const positiveReviews = classificationResults.filter(
+    (isPositive) => isPositive,
+  ).length;
+  const f_review_content =
+    product.reviews.length > 0 ? positiveReviews / product.reviews.length : 0;
 
-  console.log("cl ", classificationResults)
+  console.log("cl ", classificationResults);
   console.log(f_reviews, f_rating, f_review_content, chat, f_chat);
-  const P_real = w1 * f_reviews + w2 * f_rating + w3 * f_review_content + w4 * f_chat;
-  return Math.min(1, Math.max(0, P_real)); 
-}
-
+  const P_real =
+    w1 * f_reviews + w2 * f_rating + w3 * f_review_content + w4 * f_chat;
+  return Math.min(1, Math.max(0, P_real));
+};

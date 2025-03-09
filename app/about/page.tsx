@@ -7,7 +7,18 @@ export default function About() {
         About us
       </h2>
       <p>
-      At AI-Powered Store Legitimacy Detector, we use cutting-edge artificial intelligence to assess the authenticity of online stores by analyzing product data and customer reviews. Our system evaluates key factors such as sentiment in reviews, product ratings, and review counts to generate a trust score between 0 (fake) and 1 (real). By leveraging machine learning and statistical models, we provide users with data-driven insights to help them make informed purchasing decisions and avoid fraudulent sellers. With the growing prevalence of online scams and counterfeit products, our tool empowers consumers with a reliable way to verify store legitimacy before making a purchase. We are committed to enhancing trust in e-commerce, ensuring a safer and smarter shopping experience for everyone.
+        At AI-Powered Store Legitimacy Detector, we use cutting-edge artificial
+        intelligence to assess the authenticity of online stores by analyzing
+        product data and customer reviews. Our system evaluates key factors such
+        as sentiment in reviews, product ratings, and review counts to generate
+        a trust score between 0 (fake) and 1 (real). By leveraging machine
+        learning and statistical models, we provide users with data-driven
+        insights to help them make informed purchasing decisions and avoid
+        fraudulent sellers. With the growing prevalence of online scams and
+        counterfeit products, our tool empowers consumers with a reliable way to
+        verify store legitimacy before making a purchase. We are committed to
+        enhancing trust in e-commerce, ensuring a safer and smarter shopping
+        experience for everyone.
       </p>
       <div className="flex justify-between w-[700px] mt-20">
         <Profile url="auto.jpg" name="Peeranat Kongkipipat" course="BCG/2" />

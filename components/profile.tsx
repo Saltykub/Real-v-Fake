@@ -12,7 +12,7 @@ export default function Profile({
   return (
     <div className="items-center flex flex-col">
       <Avatar className="w-20">
-        <AvatarImage src={url} alt="@shadcn" className="rounded-full"/>
+        <AvatarImage src={url} alt="@shadcn" className="rounded-full" />
         <AvatarFallback>RvF</AvatarFallback>
       </Avatar>
       <div className="mt-3">{name}</div>

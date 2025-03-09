@@ -57,7 +57,6 @@ const textColors: Record<string, string> = {
   gray: "text-gray-600",
 };
 
-
 export default function Dashboard() {
   const supabase = createClient();
   const [platform, setPlatform] = useState<string | null>(null);
@@ -146,8 +145,7 @@ export default function Dashboard() {
     if (!error) {
       toast.success("Fake shop has been reported. Thank You!");
       setAdded(true);
-    }
-    else {
+    } else {
       toast.error("Error!");
     }
   }
@@ -191,7 +189,11 @@ export default function Dashboard() {
                     </div>
                     <div className="space-y-1">
                       <Label htmlFor="platform">Platform</Label>
-                      <Select disabled={detect} onValueChange={setPlatform} required>
+                      <Select
+                        disabled={detect}
+                        onValueChange={setPlatform}
+                        required
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="Which platform?" />
                         </SelectTrigger>
@@ -297,70 +299,96 @@ export default function Dashboard() {
             </TabsContent>
           </Tabs>
         </div>
-        <Card className={cn(detect ? "flex flex-col justify-center items-center w-full" : "hidden")}>
+        <Card
+          className={cn(
+            detect
+              ? "flex flex-col justify-center items-center w-full"
+              : "hidden",
+          )}
+        >
           <CardHeader>
             <CardTitle>Checking Results</CardTitle>
           </CardHeader>
           <CardContent>
-          <div className="relative size-40 w-full mb-6">
-            <svg className="rotate-[135deg] size-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-              {/* Background Circle */}
-              <circle 
-                cx="18" 
-                cy="18" 
-                r="16" 
-                fill="none" 
-                className={cn(strokeColorsSecondary[color])} 
-                strokeWidth="1" 
-                strokeDasharray="75 100" 
-                strokeLinecap="round"
-              ></circle>
-
-              {/* Foreground Circle (Progress) */}
-              {result && (
-                <circle 
-                  cx="18" 
-                  cy="18" 
-                  r="16" 
-                  fill="none" 
-                  className={cn(strokeColorsPrimary[color])} 
-                  strokeWidth="2" 
-                  strokeDasharray={`${75 * result} 100`} 
+            <div className="relative size-40 w-full mb-6">
+              <svg
+                className="rotate-[135deg] size-full"
+                viewBox="0 0 36 36"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Background Circle */}
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="16"
+                  fill="none"
+                  className={cn(strokeColorsSecondary[color])}
+                  strokeWidth="1"
+                  strokeDasharray="75 100"
                   strokeLinecap="round"
                 ></circle>
-              )}
-            </svg>
 
-          {/* Text Centered */}
-            <div className="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-              <span className={cn(
-                "text-4xl font-bold", 
-                result ? `text-${color}-600` : "text-gray-600 text-base"
-              )}>
-                {result ? (result * 100).toFixed(2) : "Calculating..."}
-              </span>
-              {result ? (
-                <span className={cn(`text-${color}-600 block`)}>Score</span>
-              ) : null}
+                {/* Foreground Circle (Progress) */}
+                {result && (
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    className={cn(strokeColorsPrimary[color])}
+                    strokeWidth="2"
+                    strokeDasharray={`${75 * result} 100`}
+                    strokeLinecap="round"
+                  ></circle>
+                )}
+              </svg>
+
+              {/* Text Centered */}
+              <div className="absolute top-1/2 start-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                <span
+                  className={cn(
+                    "text-4xl font-bold",
+                    result ? `text-${color}-600` : "text-gray-600 text-base",
+                  )}
+                >
+                  {result ? (result * 100).toFixed(2) : "Calculating..."}
+                </span>
+                {result ? (
+                  <span className={cn(`text-${color}-600 block`)}>Score</span>
+                ) : null}
+              </div>
+              <p className="text-gray-600 text-sm">How reliable the shop is.</p>
             </div>
-            <p className="text-gray-600 text-sm">How reliable the shop is.</p>
-          </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4 w-full">
-            <Button onClick={doneDetect} disabled={result === null} variant="outline" className="transition-all w-full">Back</Button>
-            <Button onClick={addToSupabase} disabled={added || result === null} className="transition-all w-full relative font-bold">
-              {!added && result !== null ?
-              <span className="transition-all absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-              </span> : null}
+            <Button
+              onClick={doneDetect}
+              disabled={result === null}
+              variant="outline"
+              className="transition-all w-full"
+            >
+              Back
+            </Button>
+            <Button
+              onClick={addToSupabase}
+              disabled={added || result === null}
+              className="transition-all w-full relative font-bold"
+            >
+              {!added && result !== null ? (
+                <span className="transition-all absolute -top-1 -right-1 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+              ) : null}
               Add to community
             </Button>
           </CardFooter>
         </Card>
       </div>
       <div className={cn(detect ? "block" : "hidden", "lg:w-1/2")}>
-        {detect && productLink && <Result url={productLink} setResult={setResult} />}
+        {detect && productLink && (
+          <Result url={productLink} setResult={setResult} />
+        )}
       </div>
     </div>
   );
